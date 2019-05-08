@@ -1,6 +1,6 @@
 {
   "name": "headless-integration",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Integration/Testing assistant based on Headless Chrome (Puppeteer)",
   "scripts": {
     "test": "echo \"Warning: no test specified\""
