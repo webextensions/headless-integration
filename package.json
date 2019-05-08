@@ -1,0 +1,27 @@
+{
+  "name": "headless-integration",
+  "version": "0.0.0",
+  "description": "Integration/Testing assistant based on Headless Chrome (Puppeteer)",
+  "scripts": {
+    "test": "echo \"Warning: no test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webextensions/headless-integration.git"
+  },
+  "keywords": [
+    "Headless",
+    "Chrome",
+    "Puppeteer",
+    "Integration",
+    "Testing",
+    "Assistant",
+    "Framework"
+  ],
+  "author": "Priyank Parashar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/webextensions/headless-integration/issues"
+  },
+  "homepage": "https://github.com/webextensions/headless-integration#readme"
+}
