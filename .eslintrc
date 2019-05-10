@@ -1,0 +1,58 @@
+{
+    // http://eslint.org/docs/user-guide/configuring.html
+    // https://gist.github.com/cletusw/e01a85e399ab563b1236
+    "env": {
+        "browser": false,
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended"
+        // "plugin:import/errors",
+        // "plugin:import/warnings"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {                           // http://eslint.org/docs/user-guide/migrating-to-2.0.0#language-options
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"                      // https://github.com/AtomLinter/linter-eslint/issues/462#issuecomment-190770417
+    },
+    "plugins": [
+        // "import"                                 // https://www.npmjs.com/package/eslint-plugin-import
+    ],
+    "rules": {
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1,                    // https://eslint.org/docs/rules/indent#switchcase
+                "ignoreComments": true              // https://eslint.org/docs/rules/indent#ignorecomments
+            }
+        ],
+        "linebreak-style": [ "error", "unix" ],
+        "quotes": "off",                            // http://eslint.org/docs/rules/quotes
+        "no-console": "off",
+        "no-debugger": "off",
+        "no-shadow": "off",
+        "no-var": [ "error" ],
+        "prefer-const": [ "error" ],
+        "semi": [ "error", "always" ],
+        "comma-dangle": ["error", "never"],
+        "space-before-function-paren": [
+            "error",
+            {
+                "anonymous": "always",
+                "asyncArrow": "always",
+                "named": "never"
+            }
+        ]
+        // "import/extensions": [                   // https://github.com/benmosher/eslint-plugin-import/blob/HEAD/docs/rules/extensions.md
+        //     "error",
+        //     {
+        //         "js": "ignorePackages"
+        //     }
+        // ]
+    }
+}

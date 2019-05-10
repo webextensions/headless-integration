@@ -3,7 +3,11 @@
   "version": "0.0.1",
   "description": "Integration/Testing assistant based on Headless Chrome (Puppeteer)",
   "scripts": {
-    "test": "echo \"Warning: no test specified\""
+    "test": "echo \"Warning: no test specified\"",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
+    "copy-files-from-to": "copy-files-from-to --outdated",
+    "postinstall": "npm run copy-files-from-to"
   },
   "repository": {
     "type": "git",
@@ -23,5 +27,9 @@
   "bugs": {
     "url": "https://github.com/webextensions/headless-integration/issues"
   },
-  "homepage": "https://github.com/webextensions/headless-integration#readme"
+  "homepage": "https://github.com/webextensions/headless-integration#readme",
+  "devDependencies": {
+    "copy-files-from-to": "^1.2.0",
+    "eslint": "^5.16.0"
+  }
 }

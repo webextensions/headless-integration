@@ -1,0 +1,17 @@
+{
+    "settings": {
+        "whenFileExists": "notify-about-available-change",
+        "addReferenceToSourceOfOrigin": true
+    },
+    "copyFiles": [
+        {
+            "from": {
+                "default": {
+                    "src": "https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.js",
+                    "latest": "https://unpkg.com/jquery/dist/jquery.js"
+                }
+            },
+            "to": "extension/scripts/3rdparty/jquery.js"
+        }
+    ]
+}
