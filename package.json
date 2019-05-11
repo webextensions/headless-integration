@@ -31,5 +31,8 @@
   "devDependencies": {
     "copy-files-from-to": "^1.2.0",
     "eslint": "^5.16.0"
+  },
+  "dependencies": {
+    "puppeteer": "^1.15.0"
   }
 }
