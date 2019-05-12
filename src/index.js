@@ -1,20 +1,4 @@
-#!/usr/bin/env node
-
 const puppeteer = require('puppeteer');
-
-var steps = [
-    { type: 'action', action: 'newBrowserContext' },
-    { type: 'action', action: 'openNewTab' },
-    { type: 'action', action: 'goToUrl', payload: 'http://forums.asdf.com/' },
-    {
-        type: 'assert',
-        assertion: 'assertEqual',
-        expected: 'https://asdfforums.com/',
-        get_actual: {
-            type: 'getCurrentTabUrl'
-        }
-    }
-];
 
 const fnGetActual = async function (browser, page, get_actual) {
     if (get_actual === 'getCurrentTabUrl') {
@@ -69,20 +53,22 @@ const performStep = async function (browser, page, step) {
     return page;
 };
 
-(async function () {
-    console.log('Started testing.');
-    const browser = await puppeteer.launch({
-        // headless: false
-    });
+let page = undefined;
 
-    let page = undefined;
-
+const performSteps = async function (browser, steps) {
     for (let i = 0; i < steps.length; i++) {
         const step = steps[i];
         page = await performStep(browser, page, step);
-    };
+    }
+};
 
-    await browser.close();
+const getBrowserAsync = async function (options) {
+    options = options || {};
+    const browser = await puppeteer.launch(options);
+    return browser;
+};
 
-    console.log('The tests completed successfully.');
-})();
+module.exports = {
+    getBrowserAsync,
+    performSteps
+};
