@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Integration/Testing assistant based on Headless Chrome (Puppeteer)",
   "scripts": {
-    "test": "echo \"Warning: no test specified\"",
+    "test": "./src/index.test.js",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "copy-files-from-to": "copy-files-from-to --outdated",
