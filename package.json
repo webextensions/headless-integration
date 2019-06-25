@@ -29,10 +29,11 @@
   },
   "homepage": "https://github.com/webextensions/headless-integration#readme",
   "devDependencies": {
-    "copy-files-from-to": "^1.2.0",
-    "eslint": "^5.16.0"
+    "copy-files-from-to": "^1.4.0",
+    "eslint": "^6.0.0"
   },
   "dependencies": {
-    "puppeteer": "^1.15.0"
+    "await-timeout": "^0.5.0",
+    "puppeteer": "^1.18.0"
   }
 }

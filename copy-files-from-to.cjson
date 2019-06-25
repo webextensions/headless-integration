@@ -7,7 +7,7 @@
         {
             "from": {
                 "default": {
-                    "src": "https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.js",
+                    "src": "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.js",
                     "latest": "https://unpkg.com/jquery/dist/jquery.js"
                 }
             },

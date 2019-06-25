@@ -1,30 +1,37 @@
 #!/usr/bin/env node
 
+const chalk = require('chalk');
 const headlessIntegration = require('./index.js');
 
-const steps = [
-    { type: 'action', action: 'newBrowserContext' },
-    { type: 'action', action: 'openNewTab' },
-    { type: 'action', action: 'goToUrl', payload: 'http://forums.asdf.com/' },
-    {
-        type: 'assert',
-        assertion: 'assertEqual',
-        expected: 'https://asdfforums.com/',
-        get_actual: {
-            type: 'getCurrentTabUrl'
-        }
-    }
+const testFiles = [
+    './tests/redirection-on-asdf-com.test.js',
+    './tests/redirection-on-google-com.test.js'
 ];
 
+const tests = [];
+testFiles.forEach(function (testFile) {
+    tests.push({
+        file: testFile,
+        data: require(testFile)
+    });
+});
+
 (async function () {
-    console.log('Started testing.');
+    console.log('Started testing.\n');
     const browser = await headlessIntegration.getBrowserAsync({
         // headless: false
     });
 
-    await headlessIntegration.performSteps(browser, steps);
+    for (let i = 0; i < tests.length; i++) {
+        const
+            test = tests[i],
+            { file } = test,
+            { steps } = test.data;
+        await headlessIntegration.performSteps(browser, steps);
+        console.log(chalk.green(' ✓ ') + chalk.gray(test.data.name || file));
+    }
 
     await browser.close();
 
-    console.log('The tests completed successfully.');
+    console.log('\n' + chalk.bold(chalk.green(' ✓ ') + 'The tests completed successfully.'));
 })();
