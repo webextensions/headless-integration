@@ -129,4 +129,8 @@ const asyncRunTest = async function (test, directoryOfTestFile) {
     return testPassed;
 };
 
-module.exports = asyncRunTest;
+module.exports = {
+    puppeteer,
+    asyncRunTest,
+    asyncBehaveAsRealBrowser
+};

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const asyncRunTest = require('../../src/headless-integration.js');
+const { asyncRunTest } = require('../../src/headless-integration.js');
 
 const test = {
     browserSetupSteps: [
