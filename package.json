@@ -1,6 +1,6 @@
 {
   "name": "headless-integration",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Integration/Testing assistant based on Headless Chrome (Puppeteer)",
   "main": "./src/headless-integration.js",
   "scripts": {
