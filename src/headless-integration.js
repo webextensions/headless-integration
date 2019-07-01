@@ -67,7 +67,15 @@ const asyncRunTest = async function (test, directoryOfTestFile) {
     const pageSteps = test.pageSteps;
     for (let i = 0; i < pageSteps.length; i++) {
         const pageStep = pageSteps[i];
-        if (pageStep.type === 'goto') {
+        if (pageStep.type === '_compareInnerText') {
+            const
+                selector = pageStep._payload[0],
+                expectedInnerText = pageStep._payload[1],
+                innerText = await page.$eval(selector, e => e.innerText);
+            if (innerText !== expectedInnerText) {
+                testPassed = false;
+            }
+        } else if (pageStep.type === 'goto') {
             await page.goto(...pageStep.payload);
         } else if (pageStep.type === 'waitFor') {
             await page.waitFor(...pageStep.payload);
