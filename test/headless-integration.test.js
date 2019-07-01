@@ -19,4 +19,10 @@ describe('Application', async function () {
         const testStatus = await test();
         expect(testStatus).to.equal(true);
     });
+
+    it('should be able to take screenshot for a given selector', async function () {
+        const test = require('./test-readme-tab-at-npmjs-com/test-readme-tab-at-npmjs-com.js');
+        const testStatus = await test();
+        expect(testStatus).to.equal(true);
+    });
 });

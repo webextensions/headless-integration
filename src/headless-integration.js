@@ -94,7 +94,14 @@ const asyncRunTest = async function (test, directoryOfTestFile) {
                 fileNameWithoutExtension = fileName.split('.').slice(0, -1).join('.');
             tempScreenshotPath = path.join(dirPath, fileNameWithoutExtension + '.tmp' + '.png');
 
-            await page.screenshot({path: tempScreenshotPath});
+            const selector = pageStep._payload.selector;
+            if (selector) {
+                const elHandle = await page.$(selector);
+
+                await elHandle.screenshot({path: tempScreenshotPath});
+            } else {
+                await page.screenshot({path: tempScreenshotPath});
+            }
 
             const screenshotAlreadyExists = fs.existsSync(screenshotPath);
             if (screenshotAlreadyExists) {
