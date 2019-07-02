@@ -77,6 +77,8 @@ const asyncRunTest = async function (test, directoryOfTestFile) {
             }
         } else if (pageStep.type === 'goto') {
             await page.goto(...pageStep.payload);
+        } else if (pageStep.type === 'click') {
+            await page.click(...pageStep.payload);
         } else if (pageStep.type === 'waitFor') {
             await page.waitFor(...pageStep.payload);
         } else if (pageStep.type === '_screenshot') {

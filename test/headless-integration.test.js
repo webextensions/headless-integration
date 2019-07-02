@@ -25,4 +25,10 @@ describe('Application', async function () {
         const testStatus = await test();
         expect(testStatus).to.equal(true);
     });
+
+    it('should be able to perform a simple click action', async function () {
+        const test = require('./test-simple-click-action/test-simple-click-action.js');
+        const testStatus = await test();
+        expect(testStatus).to.equal(true);
+    });
 });
