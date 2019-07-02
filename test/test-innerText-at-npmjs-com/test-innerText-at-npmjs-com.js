@@ -24,6 +24,4 @@ const main = async function () {
     return testStatus;
 };
 
-main();
-
 module.exports = main;

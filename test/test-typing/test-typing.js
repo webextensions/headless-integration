@@ -10,9 +10,11 @@ const test = {
         { type: '_behave-as-real-browser' }
     ],
     pageSteps: [
-        { type: 'goto', payload: ['https://www.npmjs.com/package/headless-integration', {waitUntil: 'networkidle2' }] },
-        { type: 'click', payload: ['.center-ns > div + ul.list li:last-child a'] },
-        { type: '_compareInnerText', _payload: ['#versions div + h3', 'Current Tags' ] }
+        { type: 'goto', payload: ['https://github.com/webextensions/headless-integration', {waitUntil: 'networkidle2' }] },
+        { type: 'click', payload: ['.header-search-input'] },
+        { type: 'type', payload: ['.header-search-input', 'dummy', {delay: 50}] },
+        { type: 'waitFor', payload: [100] },
+        { type: '_screenshot', _payload: { selector: '#jump-to-results', path: 'search-where-suggestions.png', compare: true } }
     ],
     puppeteerCleanUpSteps: [
         { type: 'close-browser-if-required' }

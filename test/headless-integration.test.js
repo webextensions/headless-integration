@@ -31,4 +31,10 @@ describe('Application', async function () {
         const testStatus = await test();
         expect(testStatus).to.equal(true);
     });
+
+    it('should be able to type in an input field', async function () {
+        const test = require('./test-typing/test-typing.js');
+        const testStatus = await test();
+        expect(testStatus).to.equal(true);
+    });
 });
