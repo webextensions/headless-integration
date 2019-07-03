@@ -34,8 +34,10 @@
     "mocha": "^6.1.4"
   },
   "dependencies": {
+    "async": "^3.1.0",
     "await-timeout": "^0.6.0",
     "deep-extend": "^0.6.0",
+    "glob": "^7.1.4",
     "looks-same": "^7.2.1",
     "puppeteer": "^1.18.1"
   }

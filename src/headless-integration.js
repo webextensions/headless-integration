@@ -4,6 +4,8 @@ const
 
 const
     deepExtend = require('deep-extend'),
+    async = require('async'),
+    glob = require('glob'),
     looksSame = require('looks-same');
 
 const
@@ -12,16 +14,32 @@ const
 const
     asyncBehaveAsRealBrowser = require('./utils/async-behave-as-real-browser.js');
 
-const asyncLooksSame = async function (img1, img2) {
+const asyncLooksSame = async function (expectedImages, imageToCompare) {
     return new Promise(function (resolve, reject) {
-        looksSame(img1, img2, {strict: true}, function (err, {equal}) {
-            if (err) {
-                reject(err);
-            } else {
-                // equal will be true, if images looks the same
-                resolve(equal);
+        async.someSeries(
+            expectedImages,
+            function (expectedImage, done) {
+                looksSame(expectedImage, imageToCompare, {strict: true}, function (err, {equal}) {
+                    if (err) {
+                        done(err);
+                    } else {
+                        let matchFound = false;
+                        // equal will be true, if images looks the same
+                        if (equal) {
+                            matchFound = true;
+                        }
+                        done(null, matchFound);
+                    }
+                });
+            },
+            function (err, matchFound) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(matchFound);
+                }
             }
-        });
+        );
     });
 };
 
@@ -95,7 +113,8 @@ const asyncRunTest = async function (test, directoryOfTestFile) {
             const
                 dirPath = path.dirname(screenshotPath),
                 fileName = path.basename(screenshotPath),
-                fileNameWithoutExtension = fileName.split('.').slice(0, -1).join('.');
+                fileNameWithoutExtension = fileName.split('.').slice(0, -1).join('.'),
+                fileNameWithDigitSuffixGlob = path.join(dirPath, fileNameWithoutExtension + '.[0-9]' + '.png'); // TODO: Ideally, the glob pattern should be able to contain any number of digits. But, practically, it is not required.
             tempScreenshotPath = path.join(dirPath, fileNameWithoutExtension + '.tmp' + '.png');
 
             const selector = pageStep._payload.selector;
@@ -109,7 +128,8 @@ const asyncRunTest = async function (test, directoryOfTestFile) {
 
             const screenshotAlreadyExists = fs.existsSync(screenshotPath);
             if (screenshotAlreadyExists) {
-                const imagesAreMatching = await asyncLooksSame(screenshotPath, tempScreenshotPath);
+                const expectedScreenshots = [screenshotPath].concat(glob.sync(fileNameWithDigitSuffixGlob, {cwd: '/'}));
+                const imagesAreMatching = await asyncLooksSame(expectedScreenshots, tempScreenshotPath);
                 if (imagesAreMatching) {
                     // console.log('Passed the test (images are same).');
                     fs.unlinkSync(tempScreenshotPath);
