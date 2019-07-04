@@ -1,8 +1,4 @@
-#!/usr/bin/env node
-
-const { asyncRunTest } = require('../../src/headless-integration.js');
-
-const test = {
+module.exports = {
     browserSetupSteps: [
         { type: 'launch_if-required', _payload: [{ /* headless: false /* */ }] }
     ],
@@ -20,11 +16,3 @@ const test = {
         { type: 'close-browser-if-required' }
     ]
 };
-
-const main = async function () {
-    const testStatus = await asyncRunTest(test, __dirname);
-
-    return testStatus;
-};
-
-module.exports = main;
