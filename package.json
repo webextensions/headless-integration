@@ -39,6 +39,7 @@
     "deep-extend": "^0.6.0",
     "glob": "^7.1.4",
     "looks-same": "^7.2.1",
-    "puppeteer": "^1.18.1"
+    "puppeteer": "^1.18.1",
+    "relaxed-json": "^1.0.3"
   }
 }

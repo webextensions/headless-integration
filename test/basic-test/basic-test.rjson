@@ -1,4 +1,4 @@
-module.exports = {
+{
     browserSetupSteps: [
         { type: 'launch_if-required', _payload: [{ /* headless: false /* */ }] }
     ],
@@ -12,4 +12,4 @@ module.exports = {
     puppeteerCleanUpSteps: [
         { type: 'close-browser-if-required' }
     ]
-};
+}
