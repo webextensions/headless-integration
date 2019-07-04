@@ -1,4 +1,5 @@
 {
+    summary: 'should be able to perform a simple click action',
     browserSetupSteps: [
         { type: 'launch_if-required', _payload: [{ /* headless: false /* */ }] }
     ],
