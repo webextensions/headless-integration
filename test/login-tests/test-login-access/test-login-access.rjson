@@ -1,9 +1,9 @@
 /*
     $ cd <root-of-project>
-    $ cd node_modules/login/
+    $ cd node_modules/login-express-session/
     $ npm install
     $ cd ../../
-    $ ./node_modules/login/bin/www
+    $ ./node_modules/login-express-session/bin/www
     Test application would now be available at:
         http://localhost:3000/
     Reference:
