@@ -31,6 +31,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^6.0.1",
+    "login": "github:rkristelijn/login",
     "mocha": "^6.1.4"
   },
   "dependencies": {
