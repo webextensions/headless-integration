@@ -50,14 +50,14 @@ const asyncRunTest = async function (test, directoryOfTestFile) {
     const browserSetupSteps = test.browserSetupSteps;
     for (let i = 0; i < browserSetupSteps.length; i++) {
         const browserSetupStep = browserSetupSteps[i];
-        if (browserSetupStep.type === 'launch_if-required') {
+        if (browserSetupStep.type === '_launch_if-required') {
             const defaultOptions = {
                 // headless: false
             };
             const
-                _payload = browserSetupStep._payload || [],
-                _payloadOptions = _payload[0] || {},
-                options = deepExtend(defaultOptions, _payloadOptions);
+                payload = browserSetupStep.payload || [],
+                payloadOptions = payload[0] || {},
+                options = deepExtend(defaultOptions, payloadOptions);
             browser = await puppeteer.launch(options);
         } else {
             console.log('Could not perform the following step (Reason: Not implemented yet):');
@@ -85,29 +85,26 @@ const asyncRunTest = async function (test, directoryOfTestFile) {
     const pageSteps = test.pageSteps;
     for (let i = 0; i < pageSteps.length; i++) {
         const pageStep = pageSteps[i];
-        if (pageStep.type === '_compareInnerText') {
+        if (
+            typeof pageStep.type === 'string' &&
+            typeof page[pageStep.type] === 'function'
+        ) {
+            await page[pageStep.type](...pageStep.payload);
+        } else if (pageStep.type === '_compareInnerText') {
             const
-                selector = pageStep._payload[0],
-                expectedInnerText = pageStep._payload[1],
+                selector = pageStep.payload[0],
+                expectedInnerText = pageStep.payload[1],
                 innerText = await page.$eval(selector, e => e.innerText);
             if (innerText !== expectedInnerText) {
                 testPassed = false;
             }
-        } else if (pageStep.type === 'goto') {
-            await page.goto(...pageStep.payload);
-        } else if (pageStep.type === 'click') {
-            await page.click(...pageStep.payload);
-        } else if (pageStep.type === 'type') {
-            await page.type(...pageStep.payload);
-        } else if (pageStep.type === 'waitFor') {
-            await page.waitFor(...pageStep.payload);
         } else if (pageStep.type === '_screenshot') {
             // let considerDirectoryFromCurrentPath = true;
             // if (pageStep.considerDirectoryFromCurrentPath === false) {
             //     considerDirectoryFromCurrentPath = false;
             // }
 
-            const screenshotPath = path.join(directoryOfTestFile, pageStep._payload.path);
+            const screenshotPath = path.join(directoryOfTestFile, pageStep.payload.path);
             let tempScreenshotPath = screenshotPath;
 
             const
@@ -117,7 +114,7 @@ const asyncRunTest = async function (test, directoryOfTestFile) {
                 fileNameWithDigitSuffixGlob = path.join(dirPath, fileNameWithoutExtension + '.[0-9]' + '.png'); // TODO: Ideally, the glob pattern should be able to contain any number of digits. But, practically, it is not required.
             tempScreenshotPath = path.join(dirPath, fileNameWithoutExtension + '.tmp' + '.png');
 
-            const selector = pageStep._payload.selector;
+            const selector = pageStep.payload.selector;
             if (selector) {
                 const elHandle = await page.$(selector);
 
@@ -156,7 +153,7 @@ const asyncRunTest = async function (test, directoryOfTestFile) {
     const puppeteerCleanUpSteps = test.puppeteerCleanUpSteps;
     for (let i = 0; i < puppeteerCleanUpSteps.length; i++) {
         const puppeteerCleanUpStep = puppeteerCleanUpSteps[i];
-        if (puppeteerCleanUpStep.type === 'close-browser-if-required') {
+        if (puppeteerCleanUpStep.type === '_close-browser-if-required') {
             await browser.close();
         } else {
             console.log('Could not perform the following step (Reason: Not implemented yet):');
