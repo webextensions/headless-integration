@@ -1,14 +1,7 @@
 /*
-    $ cd <root-of-project>
-    $ cd node_modules/login-express-session/
-    $ npm install
-    $ cd ../../
-    $ ./node_modules/login-express-session/bin/www
+    $ npm run login-express-session
     Test application would now be available at:
         http://localhost:3000/
-    Reference:
-        https://github.com/rkristelijn/login/issues/1 (Request for adding ISC/MIT license and publishing it to npm)
-        Status: fixed
 */
 {
     summary: 'should load the login access page properly',
