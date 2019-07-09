@@ -11,7 +11,7 @@
     pageSetupSteps: [
         { type: '_behave-as-real-browser' }
     ],
-    _$variables: './variables.confidential.json',
+    _$variables: './variables.confidential.rjson',
     pageSteps: [
         { type: 'goto', payload: ['http://localhost:3000/', {waitUntil: 'networkidle0' }] },
         { type: '_screenshot', payload: { path: 'test-initial-load.png', compare: true } },
