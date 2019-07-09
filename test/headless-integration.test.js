@@ -23,7 +23,7 @@ describe('Application', async function () {
     // https://stackoverflow.com/questions/16607039/in-mocha-testing-while-calling-asynchronous-function-how-to-avoid-the-timeout-er/16607408#16607408
     this.timeout(15000);
 
-    const files = glob.sync('./**/*.rjson', {cwd: __dirname});
+    const files = glob.sync('./**/*.test.rjson', {cwd: __dirname});
 
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
