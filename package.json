@@ -32,7 +32,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^6.0.1",
-    "login-express-session": "github:webextensions/login",
+    "login-express-session": "github:webextensions/login#0ba91b61bbd3b52295095ab536c2b6b8fb65762f",
     "mocha": "^6.1.4"
   },
   "dependencies": {
