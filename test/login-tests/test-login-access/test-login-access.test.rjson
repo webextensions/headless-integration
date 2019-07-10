@@ -13,6 +13,8 @@
     ],
     _variables: './variables.confidential.rjson',
     pageSteps: [
+        { type: '_spawn', payload: ['../../../node_modules/login-express-session/bin/www'] },
+        { type: 'waitFor', payload: [500] },    // Wait a little to let the server start
         { type: 'goto', payload: ['http://localhost:3000/', {waitUntil: 'networkidle0' }] },
         { type: '_screenshot', payload: { path: 'test-initial-load.png', compare: true } },
         { type: 'type', payload: ['input[name=username]', '${_variables.username}', {delay: 50}] },

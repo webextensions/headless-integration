@@ -2,6 +2,10 @@ const
     path = require('path'),
     fs = require('fs');
 
+const {
+    spawn
+} = require('child_process');
+
 const
     deepExtend = require('deep-extend'),
     async = require('async'),
@@ -46,6 +50,8 @@ const asyncLooksSame = async function (expectedImages, imageToCompare) {
 const asyncRunTest = async function (test, directoryOfTestFile) {
     let testPassed = true;
     let browser = undefined;
+
+    const initiatedProcesses = [];
 
     const browserSetupSteps = test.browserSetupSteps;
     for (let i = 0; i < browserSetupSteps.length; i++) {
@@ -143,6 +149,11 @@ const asyncRunTest = async function (test, directoryOfTestFile) {
                 console.log(`A new screenshot has been generated at ${screenshotPath}. Please verify.`);
                 testPassed = false;
             }
+        } else if (pageStep.type === '_spawn') {
+            const command = pageStep.payload[0];
+            const newProcess = spawn(command, [], { cwd: directoryOfTestFile });
+
+            initiatedProcesses.push(newProcess);
         } else {
             console.log('Could not perform the following step (Reason: Not implemented yet):');
             console.log(pageStep);
@@ -160,6 +171,15 @@ const asyncRunTest = async function (test, directoryOfTestFile) {
             console.log(puppeteerCleanUpStep);
             throw new Error('Could not perform the given step.');
         }
+    }
+
+    // Cleanup the initiated processes
+    // TODO:
+    //     * Other methods of killing the process
+    //     * If the process has already been killed, then don't attempt to kill it
+    for (let i = 0; i < initiatedProcesses.length; i++) {
+        const initiatedProcess = initiatedProcesses[i];
+        initiatedProcess.kill('SIGINT');
     }
 
     return testPassed;
