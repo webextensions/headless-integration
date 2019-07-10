@@ -11,12 +11,12 @@
     pageSetupSteps: [
         { type: '_behave-as-real-browser' }
     ],
-    _$variables: './variables.confidential.rjson',
+    _variables: './variables.confidential.rjson',
     pageSteps: [
         { type: 'goto', payload: ['http://localhost:3000/', {waitUntil: 'networkidle0' }] },
         { type: '_screenshot', payload: { path: 'test-initial-load.png', compare: true } },
-        { type: 'type', payload: ['input[name=username]', '${_$variables.username}', {delay: 50}] },
-        { type: 'type', payload: ['input[name=password]', '${_$variables.password}', {delay: 50}] },
+        { type: 'type', payload: ['input[name=username]', '${_variables.username}', {delay: 50}] },
+        { type: 'type', payload: ['input[name=password]', '${_variables.password}', {delay: 50}] },
         { type: 'click', payload: ['input[type=submit]'] },
         // Need to wait a little for the browser to complete some parts of rendering,
         // otherwise, there might be a difference towards the rendering of the bottom

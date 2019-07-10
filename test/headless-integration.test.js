@@ -38,19 +38,19 @@ describe('Application', async function () {
         }
         itFn(testSummary, async function () {
             // ! IMPORTANT: This variable is used by the "eval" statement
-            let _$variables; // eslint-disable-line no-unused-vars
+            let _variables; // eslint-disable-line no-unused-vars
 
-            if (typeof test._$variables === 'undefined') {
+            if (typeof test._variables === 'undefined') {
                 // do nothing
-            } else if (test._$variables) {
-                if (typeof test._$variables === 'string') {
-                    _$variables = requireRelaxedJson(path.resolve(__dirname, path.dirname(file), test._$variables));
-                } else if (Array.isArray(test._$variables)) {
-                    console.log('Invalid value for _$variables for test in file: ' + file);
+            } else if (test._variables) {
+                if (typeof test._variables === 'string') {
+                    _variables = requireRelaxedJson(path.resolve(__dirname, path.dirname(file), test._variables));
+                } else if (Array.isArray(test._variables)) {
+                    console.log('Invalid value for _variables for test in file: ' + file);
                     console.log('Exiting with error.');
                     process.exit(1);
-                } else if (typeof test._$variables === 'object') {
-                    _$variables = test._$variables;
+                } else if (typeof test._variables === 'object') {
+                    _variables = test._variables;
                 }
 
                 const stringifiedTest = JSON.stringify(test);
@@ -65,7 +65,7 @@ describe('Application', async function () {
 
                 test = (JSON.parse(stringifiedTestWithVariablesFilledUp));
             } else {
-                console.log('Invalid value for _$variables for test in file: ' + file);
+                console.log('Invalid value for _variables for test in file: ' + file);
                 console.log('Exiting with error.');
                 process.exit(1);
             }
