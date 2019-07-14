@@ -58,7 +58,11 @@ const asyncRunTest = async function (test, directoryOfTestFile) {
         const browserSetupStep = browserSetupSteps[i];
         if (browserSetupStep.type === '_launch_if-required') {
             const defaultOptions = {
-                // headless: false
+                // headless: false,
+                defaultViewport: {
+                    width: 1280,
+                    height: 640
+                }
             };
             const
                 payload = browserSetupStep.payload || [],
