@@ -7,6 +7,8 @@
     "headless-integration-server": "./server/server.js"
   },
   "scripts": {
+    "build": "webpack --mode development --config ./server/webpack.config.js",
+    "copy-files-from-to": "copy-files-from-to",
     "test": "npm run mocha",
     "mocha": "mocha",
     "lint": "eslint .",
@@ -33,10 +35,20 @@
   },
   "homepage": "https://github.com/webextensions/headless-integration#readme",
   "devDependencies": {
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.4",
+    "@babel/preset-env": "^7.5.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
+    "copy-files-from-to": "2.0.2",
+    "css-loader": "^3.0.0",
     "eslint": "^6.0.1",
     "login-express-session": "github:webextensions/login#0ba91b61bbd3b52295095ab536c2b6b8fb65762f",
-    "mocha": "^6.1.4"
+    "mocha": "^6.1.4",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.6"
   },
   "dependencies": {
     "async": "^3.1.0",
@@ -44,10 +56,13 @@
     "deep-extend": "^0.6.0",
     "express": "^4.17.1",
     "glob": "^7.1.4",
+    "kins": "0.1.3",
     "local-ip-addresses-and-hostnames": "0.1.2",
     "looks-same": "^7.2.1",
     "note-down": "0.2.2",
     "puppeteer": "^1.18.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "relaxed-json": "^1.0.3",
     "serve-static": "^1.14.1"
   }
