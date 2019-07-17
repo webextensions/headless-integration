@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "webpack --mode development --config ./server/webpack.config.js",
+    "start": "./server/server.js",
     "copy-files-from-to": "copy-files-from-to",
     "test": "npm run mocha",
     "mocha": "mocha",
